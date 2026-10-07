@@ -7,3 +7,7 @@
 
 - requirements for ML systems
     - Reliability : 
+
+7/10/26
+
+- data architecture foundations: row Vs column major ; SQL(relational) vs NoSQL
