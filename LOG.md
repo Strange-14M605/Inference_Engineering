@@ -44,3 +44,13 @@
     - P99 - 00th " - 1/100 requests suck 
 
     note: exponentially sucks less and this is what we want to measure instead of averages. 
+
+13/10/26
+
+- Did a little bit of hands-on : built a inference autoregressive loop step-by-step from tokenisation -> forward pass -> decoding/sampling -> loop
+
+- A few sampling methodologies:
+    - greedy : just argmax the highest probability logit (deterministic)
+    - Top-k : choose randomly from among the top K probabable logits ( high K -> more random)
+    - Top-p : choose smallest set of logits with probabilities that add up to P (high P -> more random)
+    - Temperature : adjust the logits (using softmax, etc.) so that the probability distribution flattens 
