@@ -54,3 +54,19 @@
     - Top-k : choose randomly from among the top K probabable logits ( high K -> more random)
     - Top-p : choose smallest set of logits with probabilities that add up to P (high P -> more random)
     - Temperature : adjust the logits (using softmax, etc.) so that the probability distribution flattens 
+
+14/10/26
+
+- Explored GPT2 model's inner workings (without 'transformer' library):
+    - extracted key model files: config.json (overview), model.safetensors (actual model weights), tokenizer files like vocab.json and merges.txt (holds merge rules)
+
+    - In config.json :
+        - model 'width' / embedding dimension / each token is represented as a vector of 768 numbers 
+        - 12 transformer blocks and attention heads
+        - vocabulary of ~50K tokens
+
+    - in safetensors file:
+        - SafeTensors format: 8-byte header length + JSON header + raw tensor data
+        - there is token embeddings (wte), positional embeddings (wpe), attention (c_attn, c_proj), mlp/ffn (c_fn , c_proj), layer norms (ln_1, ... ln_f)
+        - for each of there there is .weight and .bias file
+        - FFN / MLP takes up approx 42% of the size, followed by attention and token embeddings (wte)
