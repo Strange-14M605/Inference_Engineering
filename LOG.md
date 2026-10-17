@@ -70,3 +70,10 @@
         - there is token embeddings (wte), positional embeddings (wpe), attention (c_attn, c_proj), mlp/ffn (c_fn , c_proj), layer norms (ln_1, ... ln_f)
         - for each of there there is .weight and .bias file
         - FFN / MLP takes up approx 42% of the size, followed by attention and token embeddings (wte)
+
+17/10/26 
+
+- Built a tokenizer from scratch. It is a deterministic process that involves 3 main steps:
+    1. Break it down into unicode (even unusual characters get covered within the byte)
+    2. Based on the merge rules, merge the characters into the dominant subgroups - Tokens
+    3. Map it to the vocabulary to get numeric representations
