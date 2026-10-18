@@ -77,3 +77,20 @@
     1. Break it down into unicode (even unusual characters get covered within the byte)
     2. Based on the merge rules, merge the characters into the dominant subgroups - Tokens
     3. Map it to the vocabulary to get numeric representations
+
+18/10/26
+
+- After tokenization, to give meaning to each vector, they are converted into embeddings - token and positional embeddings
+    - token embeddings is a matrix of [vocab_size * d_model] and tokens that are similar would have closer learned values. 
+    - positional embeddings is a matrix of [max_seq_length * d_model] and adjacent tokens in the sequence will have closer values. 
+    - small model, ex. GPT2 has a fixed sequence length ceiling (1024) and store pos emb (wpe) as part of the model. Bigger models like LLaMA replace the fixed/stored positional embeddings with a more dynamic 'rotary positional embeddings' RoPE - which calculate the positional embeddings on the fly and removed the ceiling.
+    - The final input to the transformer is an addition of the token embeddings (wte) and positional embeddings (wpe):
+    example: 
+    
+    emb["the"] = wte["the"] + wpe[0]
+
+    emb["cat"] = wte["cat"] + wpe[1]
+    
+    emb["sat"] = wte["sat"] + wpe[2]
+
+    therefore final matrix: [seq_length * d_model]
