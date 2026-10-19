@@ -94,3 +94,8 @@
     emb["sat"] = wte["sat"] + wpe[2]
 
     therefore final matrix: [seq_length * d_model]
+
+19/10/26
+
+- Took a look into transformer blocks. It has mainly 3 sublayers: the attention layer, the feed forward layer and normalization layer. 
+- The attention layer helps find the relations between the stand-alone embedded tokens. The input embedding (seq_len * d_model) is used in Q,K and V to extract attention.
